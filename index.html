@@ -299,20 +299,37 @@ index.html<!doctype html>
 
   <script>
     // ======= ВСТАВЬ СЮДА СВОИ ССЫЛКИ =======
-    const LINKS = {
-      listenAll: "PASTE_YANDEX_ARTIST_OR_RELEASE_LINK_HERE",
-      telegram: "PASTE_TELEGRAM_LINK_HERE",
-      parable: "PASTE_TRACK_LINK_FOR_PARABLE_HERE",
-      email: "booking@djronin.com",
+    const LINKS = {const LINKS = {
+  listenAll: "https://music.yandex.ru/artist/778866",
+  telegram: "", // телеги пока нет — кнопку спрячем
+  parable: "https://music.yandex.ru/album/40620801/track/148124228", // Притча недели = "Просто Живой"
+  email: "booking@djronin.com",
 
-      // Треки (можешь оставить пустыми и потом заполнить)
-      tracks: [
-        { title: "Track Title 01", yandex: "#", spotify: "#", apple: "#" },
-        { title: "Track Title 02", yandex: "#", spotify: "#", apple: "#" },
-        { title: "Track Title 03", yandex: "#", spotify: "#", apple: "#" }
-      ],
-      newReleaseTitle: "Track Title 01"
-    };
+  tracks: [
+    {
+      title: "Просто Живой",
+      yandex: "https://music.yandex.ru/album/40620801/track/148124228",
+      spotify: "#",
+      apple: "#"
+    },
+    {
+      title: "Каньон",
+      yandex: "https://music.yandex.ru/album/40412942",
+      spotify: "#",
+      apple: "#"
+    },
+    {
+      title: "Релизы (март)",
+      yandex: "https://music.yandex.ru/artist/778866",
+      spotify: "#",
+      apple: "#"
+    }
+  ],
+
+  newReleaseTitle: "Просто Живой"
+};
+
+   
 
     // ======= НЕ ТРОГАЙ НИЖЕ (само подставит) =======
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -324,6 +341,10 @@ index.html<!doctype html>
     listenLink.href = LINKS.listenAll;
     tgLink.href = LINKS.telegram;
     parableLink.href = LINKS.parable;
+    if (!LINKS.telegram) {
+  tgLink.style.display = "none";
+}
+
 
     document.getElementById("email").textContent = LINKS.email;
     document.getElementById("newRelease").textContent = LINKS.newReleaseTitle;
