@@ -170,6 +170,26 @@ index.html<!doctype html>
       .grid{grid-template-columns:1fr}
       h1{font-size:34px}
     }
+    /* УСИЛИВАЕМ ВИДИМОСТЬ РАМКИ КАРТОЧЕК */
+.track{
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* ВЫДЕЛЯЕМ ГЛАВНЫЙ РЕЛИЗ */
+.track--featured{
+  border-color: rgba(255,215,0,.35);
+  box-shadow: 0 14px 40px rgba(255,215,0,.08), 0 10px 30px rgba(0,0,0,.45);
+}
+
+/* ЖЁЛТАЯ КНОПКА ЯНДЕКС */
+.btn-yandex{
+  background:#ffd600;
+  border-color:#ffd600;
+  color:#111;
+  font-weight:700;
+}
+.btn-yandex:hover{ filter: brightness(0.95); }
   </style>
 </head>
 
@@ -252,33 +272,21 @@ index.html<!doctype html>
                 </div>
                  </div>
           <div class="track">
-            <h3 id="t1">Track Title 01</h3>
-            <div class="links">
-              <a class="btn" href="#" id="t1y">Яндекс</a>
-              <a class="btn" href="#" id="t1s">Spotify</a>
-              <a class="btn" href="#" id="t1a">Apple</a>
-            </div>
-          </div>
+            <h3>Просто живой</h3>
+             <p class="muted">Трек</p>
+              <div class="links">
+                <a class="btn btn-yandex" href="https://music.yandex.ru/album/40620801/track/148124228" target="_blank" rel="noopener">Яндекс</a>
+                </div>
+               </div>
 
-          <div class="track">
-            <h3 id="t2">Track Title 02</h3>
-            <div class="links">
-              <a class="btn" href="#" id="t2y">Яндекс</a>
-              <a class="btn" href="#" id="t2s">Spotify</a>
-              <a class="btn" href="#" id="t2a">Apple</a>
-            </div>
-          </div>
+           <div class="track">
+           <h3>Каньон</h3>
+           <p class="muted">Релиз</p>
+           <div class="links">
+            <a class="btn btn-yandex" href="https://music.yandex.ru/album/40412942" target="_blank" rel="noopener">Яндекс</a>
+             </div>
+               </div>
 
-          <div class="track">
-            <h3 id="t3">Track Title 03</h3>
-            <div class="links">
-              <a class="btn" href="#" id="t3y">Яндекс</a>
-              <a class="btn" href="#" id="t3s">Spotify</a>
-              <a class="btn" href="#" id="t3a">Apple</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section class="section" id="contact">
