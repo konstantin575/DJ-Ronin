@@ -190,6 +190,19 @@ index.html<!doctype html>
   font-weight:700;
 }
 .btn-yandex:hover{ filter: brightness(0.95); }
+    /* мини-обложка рядом с кнопкой */
+.mini-cover{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  object-fit:cover;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+  opacity:.95;
+}
+
+/* выравниваем иконку + кнопку по центру */
+.links{ align-items:center; }
   </style>
 </head>
 
@@ -268,6 +281,7 @@ index.html<!doctype html>
           <h3>Вдыхать Весну</h3>
             <p class="muted">Сингл • 24 февраля 2026</p>
             <div class="links">
+              <img class="mini-cover" src="cover-vesna.png" alt="Обложка: Вдыхать Весну">
                <a class="btn btn-yandex" href="https://music.yandex.ru/album/40798190/track/148516409" target="_blank" rel="noopener">Яндекс</a>
                 </div>
                  </div>
@@ -275,6 +289,7 @@ index.html<!doctype html>
             <h3>Просто живой</h3>
              <p class="muted">Трек</p>
               <div class="links">
+                <img class="mini-cover" src="cover-prosto.jpeg" alt="Обложка: Просто живой">
               <a class="btn btn-yandex" href="https://music.yandex.ru/album/40620801/track/148124228" target="_blank" rel="noopener">Яндекс</a>
                 </div>
                </div>
@@ -283,6 +298,7 @@ index.html<!doctype html>
            <h3>Каньон</h3>
            <p class="muted">Релиз</p>
            <div class="links">
+             <img class="mini-cover" src="cover-kanyon.jpeg" alt="Обложка: Каньон">
             <a class="btn btn-yandex" href="https://music.yandex.ru/album/40412942" target="_blank" rel="noopener">Яндекс</a>
              </div>
                </div>
