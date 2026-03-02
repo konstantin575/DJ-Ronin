@@ -246,21 +246,17 @@ index.html<!doctype html>
   max-width: 520px;
   border-radius: 22px;
   overflow: hidden;
-
   border: 1px solid rgba(255,255,255,.14);
   box-shadow: 0 14px 40px rgba(0,0,0,.45);
-  background: #000;
+  background:#000;
   aspect-ratio: 1 / 1;
 }
-
-/* Видео = просто размер и поведение */
 .teaser-video{
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
 /* Кнопка поверх */
 .teaserPlay{
   position: absolute;
@@ -292,6 +288,28 @@ index.html<!doctype html>
   backdrop-filter: blur(10px);
 }
 .teaserPlay:hover{ background:rgba(12,14,18,.86); }
+    .hero{
+  display:grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 28px;
+  align-items:start;
+}
+@media (max-width: 900px){
+  .hero{ grid-template-columns: 1fr; }
+}
+    .portrait{
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 14px 40px rgba(0,0,0,.45);
+  background:#000;
+}
+.portrait img{
+  width:100%;
+  height:auto;
+  display:block;
+}
   </style>
 </head>
 
@@ -306,45 +324,34 @@ index.html<!doctype html>
       </nav>
     </header>
 
-    <section class="hero">
-      <div class="heroText">
-        <div class="teaser">
- <div class="teaserBox">
-  <button class="teaserPlay" id="teaserPlay" type="button">▶ Смотреть 16 сек</button>
+  <section class="hero">
+  <div class="heroText">
 
-  <video class="teaser-video"controls playsinline preload="metadata" poster="cover-vesna.png">
-  <source src="teaser-vesna-16s.mp4?v=1" type="video/mp4">
-</video>
-</div>
-        <h1>DJ RONIN</h1>
-        <p class="sub">
-          Музыка-притчи. Deep House / Melodic Electronic.<br/>
-          Форма. Ритм. Выбор.
-        </p>
+    <div class="teaser">
+      <div class="teaserBox">
+        <button class="teaserPlay" id="teaserPlay" type="button">▶ Смотреть 16 сек</button>
 
-        <div class="chips">
-          <span class="chip">Deep House</span>
-          <span class="chip">Melodic</span>
-          <span class="chip">Minimal</span>
-          <span class="chip">Digital Artist</span>
-        </div>
-
-        <div class="btns">
-         <a class="btn primary" href="https://music.yandex.ru/artist/778866" id="listenLink">Слушать релизы</a>
-          <a class="btn" href="#" id="tgLink">Telegram</a>
-        </div>
-
-        <div class="mini">
-          Новый релиз: <strong id="newRelease">—</strong>
-        </div>
+        <video id="teaserVideo" class="teaser-video"
+               controls playsinline preload="metadata"
+               poster="cover-vesna.png">
+          <source src="teaser-vesna-16s.mp4?v=1" type="video/mp4">
+        </video>
       </div>
+    </div>
 
-      <div class="portrait">
-        <!-- ФАЙЛ ДОЛЖЕН НАЗЫВАТЬСЯ ТОЧНО: ronin-portrait.jpg -->
-   <img src="portrait.jpg?v=1"alt="DJ Ronin portrait" decoding="async"fetchpriority="high" width="900" height="1350">
-        <div class="vignette"></div>
-      </div>
-    </section>
+    <h1>DJ RONIN</h1>
+    <p class="big">Музыка-притчи. Deep House / Melodic Electronic.</p>
+
+    <!-- ниже оставь свои chips/кнопки/mini как было -->
+  </div>
+
+  <div class="portrait">
+    <img src="portrait.jpg?v=1" alt="DJ Ronin portrait"
+         decoding="async" fetchpriority="high"
+         width="900" height="1350">
+    <div class="vignette"></div>
+  </div>
+</section>
     <section class="section" id="about">
       <div class="card">
         <div class="title">О проекте</div>
@@ -441,72 +448,85 @@ index.html<!doctype html>
   </div>
 
   <script>
-    // ======= ВСТАВЬ СЮДА СВОИ ССЫЛКИ =======
-    const LINKS = {const LINKS = {
-  listenAll: "https://music.yandex.ru/artist/778866",
-  telegram: "", // телеги пока нет — кнопку спрячем
-  parable: "https://music.yandex.ru/album/40620801/track/148124228", // Притча недели = "Просто Живой"
-  email: "booking@djronin.com",
+  // ======= ВСТАВЬ СЮДА СВОИ ССЫЛКИ =======
+  const LINKS = {
+    listenAll: "https://music.yandex.ru/artist/778866",
+    telegram: "", // телеги пока нет — кнопку спрячем
+    parable: "https://music.yandex.ru/album/40620801/track/148124228", // Притча недели
+    email: "booking@djronin.com",
 
-  tracks: [
-    {
-      title: "Просто Живой",
-      yandex: "https://music.yandex.ru/album/40620801/track/148124228",
-      spotify: "#",
-      apple: "#"
-    },
-    {
-      title: "Каньон",
-      yandex: "https://music.yandex.ru/album/40412942",
-      spotify: "#",
-      apple: "#"
-    },
-    {
-      title: "Релизы (март)",
-      yandex: "https://music.yandex.ru/artist/778866",
-      spotify: "#",
-      apple: "#"
-    }
-  ],
+    tracks: [
+      {
+        title: "Просто Живой",
+        yandex: "https://music.yandex.ru/album/40620801/track/148124228",
+        spotify: "#",
+        apple: "#"
+      },
+      {
+        title: "Каньон",
+        yandex: "https://music.yandex.ru/album/40412942",
+        spotify: "#",
+        apple: "#"
+      },
+      {
+        title: "Релизы (март)",
+        yandex: "https://music.yandex.ru/artist/778866",
+        spotify: "#",
+        apple: "#"
+      }
+    ],
 
-  newReleaseTitle: "Просто Живой"
-};
+    newReleaseTitle: "Просто Живой"
+  };
 
-   
+  // ======= НЕ ТРОГАЙ НИЖЕ (само подставит) =======
 
-    // ======= НЕ ТРОГАЙ НИЖЕ (само подставит) =======
-    document.getElementById("year").textContent = new Date().getFullYear();
+  // год в футере (если есть элемент)
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    const listenLink = document.getElementById("listenLink");
-    const tgLink = document.getElementById("tgLink");
-    const parableLink = document.getElementById("parableLink");
+  // главные ссылки (если элементы есть)
+  const listenLink = document.getElementById("listenLink");
+  const tgLink = document.getElementById("tgLink");
+  const parableLink = document.getElementById("parableLink");
 
-    listenLink.href = LINKS.llistenAll: "https://music.yandex.ru/artist/778866";
-    tgLink.href = LINKS.telegram;
-    parableLink.href = LINKS.parable;
-    if (!LINKS.telegram) {
-  tgLink.style.display = "none";
-}
+  if (listenLink) listenLink.href = LINKS.listenAll;
 
+  if (tgLink) {
+    tgLink.href = LINKS.telegram || "#";
+    if (!LINKS.telegram) tgLink.style.display = "none";
+  }
 
-    document.getElementById("email").textContent = LINKS.email;
-    document.getElementById("newRelease").textContent = LINKS.newReleaseTitle;
+  if (parableLink) parableLink.href = LINKS.parable;
 
-    const ids = [
-      ["t1","t1y","t1s","t1a",0],
-      ["t2","t2y","t2s","t2a",1],
-      ["t3","t3y","t3s","t3a",2],
-    ];
+  // email / новый релиз
+  const emailEl = document.getElementById("email");
+  if (emailEl) emailEl.textContent = LINKS.email;
 
-    ids.forEach(([titleId, yId, sId, aId, idx]) => {
-      const t = LINKS.tracks[idx] || {};
-      document.getElementById(titleId).textContent = t.title || `Track ${idx+1}`;
-      document.getElementById(yId).href = t.yandex || "#";
-      document.getElementById(sId).href = t.spotify || "#";
-      document.getElementById(aId).href = t.apple || "#";
-    });
-  </script>
-        <script>
+  const newReleaseEl = document.getElementById("newRelease");
+  if (newReleaseEl) newReleaseEl.textContent = LINKS.newReleaseTitle;
+
+  // треки (если есть элементы)
+  const ids = [
+    ["t1", "t1y", "t1s", "t1a", 0],
+    ["t2", "t2y", "t2s", "t2a", 1],
+    ["t3", "t3y", "t3s", "t3a", 2],
+  ];
+
+  ids.forEach(([titleId, yId, sId, aId, idx]) => {
+    const t = LINKS.tracks[idx] || {};
+    const titleEl = document.getElementById(titleId);
+    const yEl = document.getElementById(yId);
+    const sEl = document.getElementById(sId);
+    const aEl = document.getElementById(aId);
+
+    if (titleEl) titleEl.textContent = t.title || `Track ${idx + 1}`;
+    if (yEl) yEl.href = t.yandex || "#";
+    if (sEl) sEl.href = t.spotify || "#";
+    if (aEl) aEl.href = t.apple || "#";
+  });
+</script>
+ <script>
   (function(){
     const btn = document.getElementById('teaserPlay');
     const v = document.getElementById('teaserVideo');
@@ -517,6 +537,6 @@ index.html<!doctype html>
       btn.style.display = 'none';
     });
   })();
-</script>
+</script>       
 </body>
 </html>
