@@ -310,6 +310,30 @@ index.html<!doctype html>
   height:auto;
   display:block;
 }
+    .teaserPoster{width:100%;height:100%;object-fit:cover;display:block;}
+
+.modal{position:fixed;inset:0;display:none;z-index:9999;}
+.modal.isOpen{display:block;}
+.modalBackdrop{position:absolute;inset:0;background:rgba(0,0,0,.70);}
+.modalDialog{
+  position:relative;
+  width:min(920px, calc(100% - 24px));
+  margin:40px auto;
+  border-radius:22px;
+  overflow:hidden;
+  background:#0b0c10;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 24px 80px rgba(0,0,0,.55);
+}
+.modalClose{
+  position:absolute;top:10px;right:10px;
+  width:40px;height:40px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.10);
+  color:#fff;cursor:pointer;z-index:2;
+}
+.modalFrame{aspect-ratio:1/1;background:#000;}
+.modalFrame iframe{width:100%;height:100%;border:0;display:block;}
   </style>
 </head>
 
@@ -323,20 +347,14 @@ index.html<!doctype html>
         <a href="#contact">Контакты</a>
       </nav>
     </header>
-
   <section class="hero">
   <div class="heroText">
-
-    <div class="teaser">
-      <div class="teaserBox">
-        <button class="teaserPlay" id="teaserPlay" type="button">▶ Смотреть 16 сек</button>
-<video id="teaserVideo" class="teaser-video"
-       controls playsinline preload="metadata"
-       poster="cover-vesna.png">
-  <source src="teaser-vesna-16s.webm?v=1" type="video/webm">
-  <source src="teaser-vesna-16s.mp4?v=1" type="video/mp4">
-</video>
-      </div>
+   <div class="teaser">
+  <div class="teaserBox">
+    <button class="teaserPlay" id="openTeaser" type="button">▶ Смотреть 16 сек</button>
+    <img class="teaserPoster" src="cover-vesna.png" alt="Teaser poster" loading="eager" decoding="async">
+  </div>
+</div>
     </div>
 
     <h1>DJ RONIN</h1>
@@ -352,6 +370,14 @@ index.html<!doctype html>
     <div class="vignette"></div>
   </div>
 </section>
+  <!-- МОДАЛКА ТИЗЕРА -->
+<div class="modal" id="teaserModal" aria-hidden="true">
+  <div class="modalBackdrop" id="closeTeaser"></div>
+  <div class="modalDialog" role="dialog" aria-modal="true">
+    <button class="modalClose" type="button" id="closeTeaserBtn" aria-label="Закрыть">✕</button>
+    <div class="modalFrame" id="teaserFrameWrap"></div>
+  </div>
+</div>
     <section class="section" id="about">
       <div class="card">
         <div class="title">О проекте</div>
@@ -537,6 +563,39 @@ index.html<!doctype html>
       btn.style.display = 'none';
     });
   })();
-</script>       
+</script>  
+        <script>
+  (function(){
+    const VIDEO_ID = "VIDEO_ID_HERE";
+    const openBtn = document.getElementById('openTeaser');
+    const modal = document.getElementById('teaserModal');
+    const close1 = document.getElementById('closeTeaser');
+    const close2 = document.getElementById('closeTeaserBtn');
+    const wrap = document.getElementById('teaserFrameWrap');
+
+    function openModal(){
+      modal.classList.add('isOpen');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      wrap.innerHTML = `
+        <iframe
+          src="https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=0&playsinline=1&rel=0"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+        ></iframe>`;
+    }
+
+    function closeModal(){
+      modal.classList.remove('isOpen');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      wrap.innerHTML = '';
+    }
+    if(openBtn) openBtn.addEventListener('click', openModal);
+    if(close1) close1.addEventListener('click', closeModal);
+    if(close2) close2.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+  })();
+</script>
 </body>
 </html>
