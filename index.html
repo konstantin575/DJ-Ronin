@@ -454,10 +454,17 @@ index.html<!doctype html>
       <div class="card">
         <div class="title">Контакты</div>
         <p class="big">Сотрудничество / плейлисты / букинг</p>
-        <p class="mini">
-          Email: <span id="email">booking@djronin.com</span><br/>
-          Telegram: <span id="tg">@djronin</span>
-        </p>
+       <p class="mini">
+  Email:
+  <a id="email" href="mailto:kodbox777@yandex.ru?subject=Booking%20DJ%20RONIN">
+    kodbox777@yandex.ru
+  </a>
+  <br/>
+  Instagram:
+  <a id="ig" href="https://instagram.com/DJroninmusic" target="_blank" rel="noopener">
+    @DJroninmusic
+  </a>
+</p>
       </div>
 
       <div class="card">
@@ -477,9 +484,9 @@ index.html<!doctype html>
   // ======= ВСТАВЬ СЮДА СВОИ ССЫЛКИ =======
   const LINKS = {
     listenAll: "https://music.yandex.ru/artist/778866",
-    telegram: "", // телеги пока нет — кнопку спрячем
     parable: "https://music.yandex.ru/album/40620801/track/148124228", // Притча недели
-    email: "booking@djronin.com",
+  email: "kodbox777@yandex.ru",
+instagram: "https://instagram.com/DJroninmusic",
 
     tracks: [
       {
@@ -513,15 +520,10 @@ index.html<!doctype html>
 
   // главные ссылки (если элементы есть)
   const listenLink = document.getElementById("listenLink");
-  const tgLink = document.getElementById("tgLink");
+ 
   const parableLink = document.getElementById("parableLink");
 
   if (listenLink) listenLink.href = LINKS.listenAll;
-
-  if (tgLink) {
-    tgLink.href = LINKS.telegram || "#";
-    if (!LINKS.telegram) tgLink.style.display = "none";
-  }
 
   if (parableLink) parableLink.href = LINKS.parable;
 
