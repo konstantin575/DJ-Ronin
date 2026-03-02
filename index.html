@@ -350,6 +350,37 @@ index.html<!doctype html>
   pointer-events: auto;
   text-decoration: underline;
 }
+    /* Links must be clickable inside glass cards */
+#contact a{
+  position: relative;
+  z-index: 5;
+  pointer-events: auto;
+  text-decoration: underline;
+}
+
+/* Decorative overlays must NOT catch clicks */
+.section::before, .section::after,
+.card::before, .card::after{
+  pointer-events: none;
+}
+    /* Stop portrait from growing too large */
+.hero img,
+.hero-right img,
+#portrait,
+.portrait{
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* If right column stretches */
+.hero-right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   </style>
 </head>
 
@@ -539,7 +570,20 @@ if (emailLink) {
   emailLink.textContent = LINKS.email;
   emailLink.href = `mailto:${LINKS.email}?subject=Booking%20DJ%20RONIN`;
 }
+const parableLink = document.getElementById("parableLink");
+const emailLink = document.getElementById("emailLink");
 
+if (emailLink) {
+  emailLink.textContent = LINKS.email;
+  emailLink.href = `mailto:${LINKS.email}?subject=Booking%20DJ%20RONIN`;
+}
+
+// === ВОТ СЮДА (сразу после emailLink) ===
+const igLink = document.getElementById("igLink");
+if (igLink) {
+  igLink.textContent = "@DJroninmusic";
+  igLink.href = LINKS.instagram;
+}
 const igLink = document.getElementById("igLink");
 if (igLink) {
   igLink.textContent = "@DJroninmusic";
