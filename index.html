@@ -310,6 +310,16 @@ index.html<!doctype html>
   height:auto;
   display:block;
 }
+    /* Portrait – hard limits */
+.hero img,
+.portrait,
+.hero-right img{
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
     .teaserPoster{width:100%;height:100%;object-fit:cover;display:block;}
 
 .modal{position:fixed;inset:0;display:none;z-index:9999;}
@@ -334,6 +344,12 @@ index.html<!doctype html>
 }
 .modalFrame{aspect-ratio:1/1;background:#000;}
 .modalFrame iframe{width:100%;height:100%;border:0;display:block;}
+    #contact a{
+  position: relative;
+  z-index: 5;
+  pointer-events: auto;
+  text-decoration: underline;
+}
   </style>
 </head>
 
@@ -454,16 +470,12 @@ index.html<!doctype html>
       <div class="card">
         <div class="title">Контакты</div>
         <p class="big">Сотрудничество / плейлисты / букинг</p>
-       <p class="mini">
+   <p class="mini">
   Email:
-  <a id="email" href="mailto:kodbox777@yandex.ru?subject=Booking%20DJ%20RONIN">
-    kodbox777@yandex.ru
-  </a>
+  <a id="emailLink" href="#">loading…</a>
   <br/>
   Instagram:
-  <a id="ig" href="https://instagram.com/DJroninmusic" target="_blank" rel="noopener">
-    @DJroninmusic
-  </a>
+  <a id="igLink" href="#" target="_blank" rel="noopener">loading…</a>
 </p>
       </div>
 
@@ -522,6 +534,17 @@ instagram: "https://instagram.com/DJroninmusic",
   const listenLink = document.getElementById("listenLink");
  
   const parableLink = document.getElementById("parableLink");
+    const emailLink = document.getElementById("emailLink");
+if (emailLink) {
+  emailLink.textContent = LINKS.email;
+  emailLink.href = `mailto:${LINKS.email}?subject=Booking%20DJ%20RONIN`;
+}
+
+const igLink = document.getElementById("igLink");
+if (igLink) {
+  igLink.textContent = "@DJroninmusic";
+  igLink.href = LINKS.instagram;
+}
 
   if (listenLink) listenLink.href = LINKS.listenAll;
 
