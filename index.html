@@ -312,9 +312,7 @@ index.html<!doctype html>
  <div class="teaserBox">
   <button class="teaserPlay" id="teaserPlay" type="button">▶ Смотреть 16 сек</button>
 
-  <video id="teaserVideo" class="teaser-video"
-       controls playsinline preload="metadata"
-       poster="cover-vesna.png">
+  <video class="teaser-video"controls playsinline preload="metadata" poster="cover-vesna.png">
   <source src="teaser-vesna-16s.mp4?v=1" type="video/mp4">
 </video>
 </div>
@@ -343,13 +341,10 @@ index.html<!doctype html>
 
       <div class="portrait">
         <!-- ФАЙЛ ДОЛЖЕН НАЗЫВАТЬСЯ ТОЧНО: ronin-portrait.jpg -->
-    <img src="porttrait.jpg?v=1" alt="DJ Ronin portrait"
-     decoding="async" loading="lazy"
-     width="900" height="1350">
+   <img src="portrait.jpg?v=1"alt="DJ Ronin portrait" decoding="async"fetchpriority="high" width="900" height="1350">
         <div class="vignette"></div>
       </div>
     </section>
-
     <section class="section" id="about">
       <div class="card">
         <div class="title">О проекте</div>
