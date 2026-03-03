@@ -453,6 +453,33 @@ index.html<!doctype html>
   .portrait{ justify-content: flex-start; }
   .portrait img{ max-width: 520px !important; }
 }
+    /* FORCE hero to be 2 columns even if something overrides it */
+.hero{
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px) !important;
+  gap: 32px !important;
+  align-items: start !important;
+}
+
+.heroText{ min-width: 0 !important; }
+
+.portrait{
+  min-width: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.portrait img{
+  width: 100% !important;
+  max-width: 420px !important;
+  height: auto !important;
+  display: block !important;
+}
+
+@media (max-width: 900px){
+  .hero{ grid-template-columns: 1fr !important; }
+  .portrait{ justify-content: flex-start !important; }
+}
   </style>
 </head>
 
