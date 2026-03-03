@@ -414,6 +414,45 @@ index.html<!doctype html>
   display: block;
   object-fit: cover;
 }
+    /* === HERO: 2 колонки (слева контент, справа портрет) === */
+.hero{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+  gap: 32px;
+  align-items: start;
+}
+
+/* важно: чтобы левая колонка не раздувала grid */
+.heroText{ min-width: 0; }
+
+/* правая колонка */
+.portrait{
+  position: relative;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* портрет НЕ раздувается */
+.portrait img{
+  width: 100% !important;
+  max-width: 420px !important;
+  height: auto !important;
+  display: block;
+  border-radius: 18px; /* если хочешь единый стиль */
+}
+
+/* vignette не должна мешать кликам и не должна раздувать блок */
+.vignette{
+  pointer-events: none;
+}
+
+/* мобилка — в столбик */
+@media (max-width: 900px){
+  .hero{ grid-template-columns: 1fr; }
+  .portrait{ justify-content: flex-start; }
+  .portrait img{ max-width: 520px !important; }
+}
   </style>
 </head>
 
