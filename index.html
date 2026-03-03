@@ -592,6 +592,46 @@ index.html<!doctype html>
   inset: 0 !important;
   pointer-events: none !important;
 }
+    /* === MASTER NOTE HERO: 2 columns (left teaser, right portrait) === */
+.hero{
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px) !important;
+  gap: 32px !important;
+  align-items: start !important;
+}
+
+.heroText{ min-width: 0 !important; }
+
+/* Portrait column */
+.portrait{
+  position: relative !important;
+  min-width: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+}
+
+/* Portrait size control */
+.portrait img{
+  width: 100% !important;
+  max-width: 420px !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: cover !important;
+}
+
+/* Vignette must not affect layout/clicks */
+.vignette{
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Mobile: stack */
+@media (max-width: 900px){
+  .hero{ grid-template-columns: 1fr !important; }
+  .portrait{ justify-content: flex-start !important; }
+}
   </style>
 </head>
 
