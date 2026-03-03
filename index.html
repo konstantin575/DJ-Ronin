@@ -632,6 +632,20 @@ index.html<!doctype html>
   .hero{ grid-template-columns: 1fr !important; }
   .portrait{ justify-content: flex-start !important; }
 }
+    /* контакты кликабельны поверх стекла */
+#contact a{
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  text-decoration: underline;
+}
+
+/* декоративные слои не ловят клики */
+.card::before, .card::after,
+.section::before, .section::after,
+.vignette{
+  pointer-events: none !important;
+}
   </style>
 </head>
 
