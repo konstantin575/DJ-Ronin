@@ -552,6 +552,46 @@ index.html<!doctype html>
   inset: 0;
   background: radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 100%);
 }
+    /* === FIX: portrait below heroText, no overlap === */
+.hero{
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.heroText{
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* portrait as separate centered card */
+.portrait{
+  position: relative !important;   /* убираем любые absolute */
+  z-index: 1 !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  margin: 24px auto 0 !important;
+
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 18px 70px rgba(0,0,0,.55);
+}
+
+.portrait img{
+  width: 100% !important;
+  height: auto !important;
+  max-height: 620px !important;    /* чтобы не был огромным */
+  display: block !important;
+  object-fit: cover !important;
+}
+
+/* vignette only as overlay, must not affect layout/clicks */
+.vignette{
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
   </style>
 </head>
 
