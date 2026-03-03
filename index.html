@@ -381,6 +381,39 @@ index.html<!doctype html>
   justify-content: center;
   align-items: center;
 }
+    /* --- FIX: links must be clickable --- */
+#contact, #contact .card { position: relative; z-index: 2; }
+
+#contact a, #contact .contact-a{
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  text-decoration: underline;
+}
+
+/* if glass/frames are drawn with pseudo-elements */
+.section::before, .section::after,
+.card::before, .card::after{
+  pointer-events: none !important;
+}
+    /* --- FIX: portrait size --- */
+.hero, .hero-right { min-width: 0; }
+
+.hero-right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-right img,
+.portrait,
+#portrait{
+  width: 100% !important;
+  max-width: 420px !important;
+  height: auto !important;
+  display: block;
+  object-fit: cover;
+}
   </style>
 </head>
 
@@ -503,10 +536,14 @@ index.html<!doctype html>
         <p class="big">Сотрудничество / плейлисты / букинг</p>
    <p class="mini">
   Email:
-  <a id="emailLink" href="#">loading…</a>
+  <a class="contact-a" href="mailto:kodbox777@yandex.ru?subject=Booking%20DJ%20RONIN">
+    kodbox777@yandex.ru
+  </a>
   <br/>
   Instagram:
-  <a id="igLink" href="#" target="_blank" rel="noopener">loading…</a>
+  <a class="contact-a" href="https://instagram.com/DJroninmusic" target="_blank" rel="noopener">
+    @DJroninmusic
+  </a>
 </p>
       </div>
 
