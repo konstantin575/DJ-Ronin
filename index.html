@@ -1,937 +1,639 @@
-index.html<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>DJ RONIN — Music Parables</title>
-  <meta name="description" content="DJ Ronin — deep house / melodic electronic. Music parables: form, rhythm, choice." />
-  <meta name="theme-color" content="#0b0c0f" />
+  <meta name="description" content="DJ RONIN — цифровой артист. Deep house / melodic electronic. Релизы, тизеры, расписание." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DJ RONIN — TrackZero" />
+  <meta property="og:description" content="Новый сингл DJ RONIN — TrackZero. Релиз 29 апреля 2026." />
+  <meta property="og:image" content="cover-trackzero.jpg" />
+
+  <link rel="dns-prefetch" href="//music.yandex.ru" />
+  <link rel="dns-prefetch" href="//www.youtube.com" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='60%25' text-anchor='middle' font-family='system-ui,sans-serif' font-size='36' font-weight='800' fill='%23c8a15a'%3ER%3C/text%3E%3C/svg%3E" />
 
   <style>
+    /* ========= TOKENS ========= */
     :root{
-      --bg:#0b0c0f;
+      --bg:#0a0a0a;
+      --bg-2:#111;
       --fg:#f2f2f2;
-      --muted:#a7a7a7;
-      --line:#23262f;
-      --card:#101218;
-      --radius:18px;
+      --muted:#8a8a8a;
+      --line:rgba(255,255,255,.09);
+      --line-strong:rgba(255,255,255,.16);
+      --card:#101012;
+      --accent:#c8a15a;       /* тёплый янтарь — единственный акцент */
+      --accent-hi:#dcb877;    /* hover */
+      --accent-ink:#0a0a0a;   /* текст на янтарной кнопке */
+      --radius:16px;
+      --radius-lg:22px;
+      --maxw:1160px;
+      --ease:cubic-bezier(.2,.7,.2,1);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+
+    /* ========= RESET ========= */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    html{scroll-behavior:smooth}
     body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:
-        radial-gradient(1200px 600px at 70% 5%, #161a2b 0%, var(--bg) 55%),
-        var(--bg);
+      background:var(--bg);
       color:var(--fg);
+      font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      font-size:16px;line-height:1.55;letter-spacing:.01em;
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 64px}
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      margin-bottom:22px;
+    img,video{max-width:100%;display:block;height:auto}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+    ::selection{background:var(--accent);color:var(--accent-ink)}
+    @media (prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important}
+      html{scroll-behavior:auto}
     }
+
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+    /* ========= HEADER ========= */
+    .site-header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(10,10,10,.78);
+      backdrop-filter:saturate(140%) blur(10px);
+      -webkit-backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;height:58px;gap:12px}
     .brand{
-      display:flex; align-items:center; gap:10px;
-      letter-spacing:.18em; font-weight:800;
+      display:inline-flex;align-items:center;gap:10px;
+      font-weight:800;font-size:14px;letter-spacing:.22em;
     }
-    .mark{width:10px; height:10px; border-radius:50%; background:var(--fg); opacity:.95}
-    .nav{display:flex; gap:14px; color:var(--muted); font-size:14px}
-    .nav a{padding:8px 10px; border-radius:999px}
-    .nav a:hover{background:rgba(255,255,255,.06)}
+    .brand .mark{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--accent);box-shadow:0 0 0 4px rgba(200,161,90,.14);
+    }
+    .nav ul{display:flex;gap:8px;list-style:none;margin:0;padding:0;font-size:13px}
+    .nav ul a{
+      padding:8px 12px;border-radius:999px;color:var(--muted);
+      letter-spacing:.08em;text-transform:uppercase;
+      transition:.2s color var(--ease),.2s background var(--ease);
+    }
+    .nav ul a:hover{color:var(--fg);background:rgba(255,255,255,.05)}
+    @media (max-width:640px){ .nav ul a.hide-sm{display:none} }
 
-    .hero{
-      display:grid; grid-template-columns: 1.25fr .75fr; gap:16px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    /* ========= HERO ========= */
+    .hero{padding:56px 0 56px}
+    @media (min-width:900px){ .hero{padding:88px 0 88px} }
+    .hero-grid{
+      display:grid;gap:32px;
+      grid-template-columns:1fr;
+      align-items:start;
     }
-    .heroText{padding:22px}
-    h1{
-      margin:0 0 10px;
-      font-size:44px;
-      letter-spacing:.08em;
+    @media (min-width:900px){
+      .hero-grid{
+        grid-template-columns:minmax(0,1.1fr) minmax(280px,420px);
+        gap:48px;
+      }
     }
-    .sub{
-      margin:0;
-      color:var(--muted);
-      line-height:1.55;
-      font-size:16px;
-      max-width:56ch;
+    .eyebrow{
+      font-size:12px;letter-spacing:.28em;color:var(--muted);
+      text-transform:uppercase;margin-bottom:14px;
     }
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 18px}
-    .chip{
-      border:1px solid var(--line);
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:13px;
-      color:#dadada;
-      background:rgba(0,0,0,.22);
+    .hero h1{
+      font-size:clamp(44px,8vw,88px);
+      line-height:.95;letter-spacing:-.02em;
+      margin:0 0 .25em;font-weight:800;
     }
+    .hero .lead{
+      color:var(--muted);max-width:44ch;margin:0 0 22px;font-size:18px;
+    }
+    .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 
-    .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    /* ========= BUTTONS ========= */
     .btn{
-      padding:12px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      font-weight:700;
-      font-size:14px;
-      transition:.15s transform ease, .15s background ease;
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex;align-items:center;gap:8px;
+      padding:12px 18px;border-radius:999px;
+      font-size:14px;font-weight:700;letter-spacing:.02em;
+      border:1px solid var(--line-strong);
+      background:rgba(255,255,255,.04);
+      color:var(--fg);
+      transition:.15s transform var(--ease),.2s background var(--ease),.2s border-color var(--ease),.2s color var(--ease);
     }
-    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.10)}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.08);border-color:var(--fg)}
     .btn.primary{
-      background:var(--fg);
-      color:#0b0c0f;
-      border-color:transparent;
+      background:var(--accent);color:var(--accent-ink);border-color:var(--accent);
     }
-    .mini{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px;
-    }
+    .btn.primary:hover{background:var(--accent-hi);border-color:var(--accent-hi);color:var(--accent-ink)}
+    .btn.small{padding:9px 14px;font-size:13px}
 
+    /* ========= TEASER (hero left) ========= */
+    .teaser{
+      position:relative;width:100%;
+      aspect-ratio:1/1;
+      background:#000;
+      border:1px solid var(--line-strong);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      box-shadow:0 14px 40px rgba(0,0,0,.45);
+      cursor:pointer;
+      isolation:isolate;
+    }
+    .teaser .poster{
+      position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;object-position:center;
+      transition:transform .6s var(--ease),opacity .25s var(--ease);
+    }
+    .teaser:hover .poster{transform:scale(1.02)}
+    .teaser video{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;
+    }
+    .teaser .badge{
+      position:absolute;left:14px;top:14px;z-index:2;
+      font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg);
+      background:rgba(0,0,0,.55);padding:6px 10px;border-radius:999px;
+      backdrop-filter:blur(6px);
+    }
+    .teaser .play{
+      position:absolute;left:14px;bottom:14px;z-index:2;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:14px;
+      background:rgba(12,14,18,.72);
+      border:1px solid var(--line-strong);
+      color:#fff;font-weight:700;font-size:13px;
+      backdrop-filter:blur(8px);
+      transition:.2s background var(--ease);
+    }
+    .teaser:hover .play{background:rgba(200,161,90,.92);color:var(--accent-ink);border-color:transparent}
+    .teaser .play svg{width:14px;height:14px;fill:currentColor}
+    .teaser.is-playing .poster,
+    .teaser.is-playing .play,
+    .teaser.is-playing .badge{display:none}
+
+    /* ========= PORTRAIT (hero right) ========= */
     .portrait{
-      position:relative;
-      min-height:320px;
-      background:#070707;
+      position:relative;width:100%;
+      aspect-ratio:4/5;
+      background:var(--bg-2);
+      border:1px solid var(--line-strong);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      box-shadow:0 14px 40px rgba(0,0,0,.45);
     }
     .portrait img{
-      width:100%; height:100%;
-      object-fit:cover;
-      filter:grayscale(100%) contrast(1.12);
-      opacity:.92;
+      width:100%;height:100%;object-fit:cover;
+      filter:grayscale(100%) contrast(1.05);
+      opacity:.95;
     }
-    .vignette{
-      position:absolute; inset:0;
-      background:radial-gradient(800px 420px at 60% 20%, rgba(0,0,0,.00) 0%, rgba(0,0,0,.55) 70%);
+    .portrait::after{
+      content:"";position:absolute;inset:0;
+      background:radial-gradient(120% 80% at 50% 10%, transparent 45%, rgba(0,0,0,.45) 100%);
       pointer-events:none;
     }
-      .vignette{ pointer-events:none; }
-    .section{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
+
+    /* ========= SECTIONS ========= */
+    section.block{padding:64px 0;border-top:1px solid var(--line)}
+    .section-head{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+      margin-bottom:28px;flex-wrap:wrap;
     }
-    .card{
+    .section-head h2{
+      font-size:clamp(28px,4vw,40px);
+      letter-spacing:-.01em;margin:0;font-weight:800;
+    }
+    .section-head .hint{color:var(--muted);font-size:14px;max-width:44ch}
+
+    /* ========= RELEASES ========= */
+    .rel-grid{
+      display:grid;gap:18px;
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    }
+    .rel{
+      display:flex;flex-direction:column;gap:12px;
+      background:rgba(16,18,22,.4);
       border:1px solid var(--line);
       border-radius:var(--radius);
-      background:rgba(16,18,24,.70);
-      padding:18px;
+      padding:14px;
+      transition:.2s border-color var(--ease),.2s transform var(--ease);
     }
-    .title{
-      font-size:13px;
-      color:var(--muted);
-      letter-spacing:.14em;
+    .rel:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+    .rel.featured{
+      border-color:rgba(200,161,90,.40);
+      box-shadow:0 14px 40px rgba(200,161,90,.06), 0 10px 30px rgba(0,0,0,.35);
+    }
+    .rel .cover{
+      aspect-ratio:1/1;border-radius:12px;overflow:hidden;
+      background:var(--bg-2);border:1px solid var(--line);
+    }
+    .rel .cover img{width:100%;height:100%;object-fit:cover}
+    .rel h3{margin:0;font-size:16px;font-weight:700;letter-spacing:.01em}
+    .rel .meta{color:var(--muted);font-size:13px}
+    .rel .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+    .tag{
+      display:inline-flex;align-items:center;
+      padding:8px 12px;border-radius:999px;
+      font-size:12.5px;color:var(--muted);
+      border:1px dashed var(--line-strong);
+    }
+    .tag.soon{color:var(--accent);border-color:var(--accent);border-style:solid}
+
+    /* Плейсхолдер обложки для ещё не опубликованных треков */
+    .cover.placeholder{
+      position:relative;
+      background:
+        radial-gradient(120% 80% at 30% 20%, rgba(200,161,90,.18), transparent 55%),
+        radial-gradient(120% 80% at 80% 90%, rgba(200,161,90,.08), transparent 55%),
+        #0c0c0e;
+    }
+    .cover.placeholder::after{
+      content:"";position:absolute;inset:18%;
+      border-radius:50%;
+      border:1px solid rgba(200,161,90,.45);
+    }
+    .cover.placeholder .d{
+      position:absolute;inset:0;display:grid;place-items:center;
+      color:var(--accent);font-weight:800;letter-spacing:.2em;font-size:12px;
       text-transform:uppercase;
     }
-    .big{
-      font-size:20px;
-      margin:10px 0 0;
-      line-height:1.4;
+    .countdown{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--accent);
+      padding:4px 10px;border-radius:999px;
+      border:1px solid var(--accent);
     }
+
+    /* ========= SCHEDULE ========= */
+    .sched{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+    .sched li{
+      display:grid;
+      grid-template-columns:110px 1fr auto;gap:16px;align-items:baseline;
+      padding:16px 0;border-bottom:1px solid var(--line);
+    }
+    @media (max-width:560px){
+      .sched li{grid-template-columns:90px 1fr}
+      .sched li .status{grid-column:1/-1;justify-self:start;margin-top:4px}
+    }
+    .sched .date{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px;letter-spacing:.04em}
+    .sched .title{font-size:16px;font-weight:500}
+    .sched .title em{color:var(--muted);font-style:normal;font-weight:400}
+    .sched .status{
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);
+    }
+    .sched .status.soon{color:var(--accent-ink);background:var(--accent);border-color:transparent}
+    .sched .status.released{color:var(--accent);border-color:var(--accent)}
+
+    /* ========= ABOUT ========= */
+    .about{
+      display:grid;gap:24px;grid-template-columns:1fr;
+    }
+    @media (min-width:900px){ .about{grid-template-columns:1fr 1fr;gap:40px} }
     .quote{
-      margin-top:12px;
-      padding:14px;
-      border-radius:14px;
-      border:1px dashed rgba(255,255,255,.16);
-      color:#eaeaea;
-      background:rgba(0,0,0,.22);
-      line-height:1.45;
-    }
-
-    .releases{margin-top:16px}
-    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:12px}
-    .track{
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px;
+      padding:22px;border-radius:var(--radius);
+      border:1px dashed var(--line-strong);
+      color:#e8e8e8;line-height:1.55;
       background:rgba(0,0,0,.22);
     }
-    .track h3{margin:0 0 8px; font-size:16px; letter-spacing:.02em}
-    .links{display:flex; flex-wrap:wrap; gap:8px}
 
+    /* ========= CONTACT ========= */
+    .contact{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;
+    }
+    .contact .btn{position:relative;z-index:2}
+
+    /* ========= FOOTER ========= */
     footer{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:13px;
+      padding:28px 0 48px;color:var(--muted);font-size:13px;
+      border-top:1px solid var(--line);
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
     }
-
-    @media (max-width: 860px){
-      .hero{grid-template-columns:1fr}
-      .portrait{min-height:280px}
-      .section{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      h1{font-size:34px}
-    }
-    /* УСИЛИВАЕМ ВИДИМОСТЬ РАМКИ КАРТОЧЕК */
-.track{
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-
-/* ВЫДЕЛЯЕМ ГЛАВНЫЙ РЕЛИЗ */
-.track--featured{
-  border-color: rgba(255,215,0,.35);
-  box-shadow: 0 14px 40px rgba(255,215,0,.08), 0 10px 30px rgba(0,0,0,.45);
-}
-
-/* ЖЁЛТАЯ КНОПКА ЯНДЕКС */
-.btn-yandex{
-  background:#ffd600;
-  border-color:#ffd600;
-  color:#111;
-  font-weight:700;
-}
-.btn-yandex:hover{ filter: brightness(0.95); }
-    /* мини-обложка рядом с кнопкой */
-.mini-cover{
-  width:36px;
-  height:36px;
-  border-radius:10px;
-  object-fit:cover;
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow: 0 8px 18px rgba(0,0,0,.45);
-  filter: saturate(0.85) contrast(1.05);
-  opacity:.95;
-}
-
-/* выравниваем иконку + кнопку по центру */
-.links{ align-items:center; }
-    .track--upcoming{
-  border-style: dashed;
-  border-color: rgba(255,255,255,.22);
-}
-
-.tag{
-  display:inline-flex;
-  align-items:center;
-  height:34px;
-  padding:0 12px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06);
-  color: var(--fg);
-  font-weight:600;
-  letter-spacing:.02em;
-}
-    .track--upcoming{
-  border-style: dashed;
-  border-color: rgba(255,255,255,.22);
-}
-
-.tag{
-  display:inline-flex;
-  align-items:center;
-  height:34px;
-  padding:0 12px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06);
-  color: var(--fg);
-  font-weight:600;
-  letter-spacing:.02em;
-}
-    .teaser{ margin-top:10px; }
-  /* Контейнер тизера = “дорогая рамка” */
-.teaserBox{
-  position: relative;
-  width: 100%;
-  max-width: 520px;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.14);
-  box-shadow: 0 14px 40px rgba(0,0,0,.45);
-  background:#000;
-  aspect-ratio: 1 / 1;
-}
-.teaser-video{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-/* Кнопка поверх */
-.teaserPlay{
-  position: absolute;
-  left: 16px;
-  bottom: 16px;
-  z-index: 2;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(12,14,18,.72);
-  color: #fff;
-  font-weight: 800;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-}
-.teaserPlay:hover{ background: rgba(12,14,18,.86); }
-.teaserPlay{
-  position:absolute;
-  left:16px;
-  bottom:16px;
-  z-index:2;
-  padding:12px 14px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(12,14,18,.72);
-  color:#fff;
-  font-weight:800;
-  cursor:pointer;
-  backdrop-filter: blur(10px);
-}
-.teaserPlay:hover{ background:rgba(12,14,18,.86); }
-    .hero{
-  display:grid;
-  grid-template-columns: 1fr 0.9fr;
-  gap: 28px;
-  align-items:start;
-}
-@media (max-width: 900px){
-  .hero{ grid-template-columns: 1fr; }
-}
-    .portrait{
-  position: relative;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.14);
-  box-shadow: 0 14px 40px rgba(0,0,0,.45);
-  background:#000;
-}
-.portrait img{
-  width:100%;
-  height:auto;
-  display:block;
-}
-    /* Portrait – hard limits */
-.hero img,
-.portrait,
-.hero-right img{
-  width: 100%;
-  max-width: 420px;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-    .teaserPoster{width:100%;height:100%;object-fit:cover;display:block;}
-
-.modal{position:fixed;inset:0;display:none;z-index:9999;}
-.modal.isOpen{display:block;}
-.modalBackdrop{position:absolute;inset:0;background:rgba(0,0,0,.70);}
-.modalDialog{
-  position:relative;
-  width:min(920px, calc(100% - 24px));
-  margin:40px auto;
-  border-radius:22px;
-  overflow:hidden;
-  background:#0b0c10;
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 24px 80px rgba(0,0,0,.55);
-}
-.modalClose{
-  position:absolute;top:10px;right:10px;
-  width:40px;height:40px;border-radius:14px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.10);
-  color:#fff;cursor:pointer;z-index:2;
-}
-.modalFrame{aspect-ratio:1/1;background:#000;}
-.modalFrame iframe{width:100%;height:100%;border:0;display:block;}
-    #contact a{
-  position: relative;
-  z-index: 5;
-  pointer-events: auto;
-  text-decoration: underline;
-}
-    /* Links must be clickable inside glass cards */
-#contact a{
-  position: relative;
-  z-index: 5;
-  pointer-events: auto;
-  text-decoration: underline;
-}
-
-/* Decorative overlays must NOT catch clicks */
-.section::before, .section::after,
-.card::before, .card::after{
-  pointer-events: none;
-}
-    /* Stop portrait from growing too large */
-.hero img,
-.hero-right img,
-#portrait,
-.portrait{
-  width: 100%;
-  max-width: 420px;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-/* If right column stretches */
-.hero-right{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-    /* --- FIX: links must be clickable --- */
-#contact, #contact .card { position: relative; z-index: 2; }
-
-#contact a, #contact .contact-a{
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
-  text-decoration: underline;
-}
-
-/* if glass/frames are drawn with pseudo-elements */
-.section::before, .section::after,
-.card::before, .card::after{
-  pointer-events: none !important;
-}
-    /* --- FIX: portrait size --- */
-.hero, .hero-right { min-width: 0; }
-
-.hero-right{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-right img,
-.portrait,
-#portrait{
-  width: 100% !important;
-  max-width: 420px !important;
-  height: auto !important;
-  display: block;
-  object-fit: cover;
-}
-    /* === HERO: 2 колонки (слева контент, справа портрет) === */
-.hero{
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
-  gap: 32px;
-  align-items: start;
-}
-
-/* важно: чтобы левая колонка не раздувала grid */
-.heroText{ min-width: 0; }
-
-/* правая колонка */
-.portrait{
-  position: relative;
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-}
-
-/* портрет НЕ раздувается */
-.portrait img{
-  width: 100% !important;
-  max-width: 420px !important;
-  height: auto !important;
-  display: block;
-  border-radius: 18px; /* если хочешь единый стиль */
-}
-
-/* vignette не должна мешать кликам и не должна раздувать блок */
-.vignette{
-  pointer-events: none;
-}
-
-/* мобилка — в столбик */
-@media (max-width: 900px){
-  .hero{ grid-template-columns: 1fr; }
-  .portrait{ justify-content: flex-start; }
-  .portrait img{ max-width: 520px !important; }
-}
-    /* FORCE hero to be 2 columns even if something overrides it */
-.hero{
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px) !important;
-  gap: 32px !important;
-  align-items: start !important;
-}
-
-.heroText{ min-width: 0 !important; }
-
-.portrait{
-  min-width: 0 !important;
-  display: flex !important;
-  justify-content: center !important;
-}
-
-.portrait img{
-  width: 100% !important;
-  max-width: 420px !important;
-  height: auto !important;
-  display: block !important;
-}
-
-@media (max-width: 900px){
-  .hero{ grid-template-columns: 1fr !important; }
-  .portrait{ justify-content: flex-start !important; }
-}
-    .heroGrid{
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px) !important;
-  gap: 32px !important;
-  align-items: start !important;
-}
-
-.heroText{ min-width: 0 !important; }
-
-.portrait{
-  min-width: 0 !important;
-  display: flex !important;
-  justify-content: center !important;
-}
-
-.portrait img{
-  width: 100% !important;
-  max-width: 420px !important;
-  height: auto !important;
-  display: block !important;
-}
-
-.vignette{ pointer-events: none !important; }
-
-@media (max-width: 900px){
-  .heroGrid{ grid-template-columns: 1fr !important; }
-  .portrait{ justify-content: flex-start !important; }
-}
-    /* === Portrait as separate premium block (below heroText) === */
-.hero{
-  display: block;              /* явно: всё в колонку */
-}
-
-.portrait{
-  margin-top: 28px;
-  max-width: 520px;
-  width: 100%;
-  position: relative;
-
-  border-radius: 22px;
-  overflow: hidden;
-
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-  box-shadow: 0 18px 70px rgba(0,0,0,.55);
-}
-
-/* центрируем портретный блок внутри HERO */
-.hero .portrait{
-  margin-left: 0;              /* по умолчанию слева */
-}
-
-/* если хочешь по центру — включи эту строку */
-.hero .portrait{ margin-left: auto; margin-right: auto; }
-
-.portrait img{
-  width: 100% !important;
-  height: auto !important;
-  display: block;
-  object-fit: cover;
-
-  /* чтобы не был огромным по высоте */
-  max-height: 620px;
-}
-
-/* виньетка не должна мешать кликам */
-.vignette{
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 100%);
-}
-    /* === FIX: portrait below heroText, no overlap === */
-.hero{
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.heroText{
-  position: relative !important;
-  z-index: 5 !important;
-}
-
-/* portrait as separate centered card */
-.portrait{
-  position: relative !important;   /* убираем любые absolute */
-  z-index: 1 !important;
-  width: 100% !important;
-  max-width: 520px !important;
-  margin: 24px auto 0 !important;
-
-  border-radius: 22px;
-  overflow: hidden;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-  box-shadow: 0 18px 70px rgba(0,0,0,.55);
-}
-
-.portrait img{
-  width: 100% !important;
-  height: auto !important;
-  max-height: 620px !important;    /* чтобы не был огромным */
-  display: block !important;
-  object-fit: cover !important;
-}
-
-/* vignette only as overlay, must not affect layout/clicks */
-.vignette{
-  position: absolute !important;
-  inset: 0 !important;
-  pointer-events: none !important;
-}
-    /* === MASTER NOTE HERO: 2 columns (left teaser, right portrait) === */
-.hero{
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px) !important;
-  gap: 32px !important;
-  align-items: start !important;
-}
-
-.heroText{ min-width: 0 !important; }
-
-/* Portrait column */
-.portrait{
-  position: relative !important;
-  min-width: 0 !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
-}
-
-/* Portrait size control */
-.portrait img{
-  width: 100% !important;
-  max-width: 420px !important;
-  height: auto !important;
-  display: block !important;
-  object-fit: cover !important;
-}
-
-/* Vignette must not affect layout/clicks */
-.vignette{
-  position: absolute !important;
-  inset: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Mobile: stack */
-@media (max-width: 900px){
-  .hero{ grid-template-columns: 1fr !important; }
-  .portrait{ justify-content: flex-start !important; }
-}
-    /* контакты кликабельны поверх стекла */
-#contact a{
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
-  text-decoration: underline;
-}
-
-/* декоративные слои не ловят клики */
-.card::before, .card::after,
-.section::before, .section::after,
-.vignette{
-  pointer-events: none !important;
-}
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand"><span class="mark"></span><span>DJ RONIN</span></div>
-      <nav class="nav">
-        <a href="#about">О проекте</a>
-        <a href="#releases">Релизы</a>
-        <a href="#contact">Контакты</a>
-      </nav>
-    </header>
-<section class="hero" id="top">
-  <div class="heroGrid">
-    <div class="heroText">
-      <div class="teaser">
-        <div class="teaserBox">
-          <button class="teaserPlay" id="openTeaser" type="button">▶ Смотреть 16 сек</button>
-          <img class="teaserPoster" src="cover-vesna.png" alt="Teaser poster" loading="eager" decoding="async">
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="#top" class="brand"><span class="mark" aria-hidden="true"></span><span>DJ RONIN</span></a>
+    <nav aria-label="Навигация">
+      <ul>
+        <li><a href="#releases">Релизы</a></li>
+        <li><a href="#schedule" class="hide-sm">Расписание</a></li>
+        <li><a href="#about" class="hide-sm">О проекте</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Цифровой артист · Deep house / Melodic</div>
+        <h1>DJ&nbsp;RONIN</h1>
+        <p class="lead">Музыка-притчи. Смысл слышен в паузах. <strong style="color:var(--fg)">Новый сингл «TrackZero» — 29 апреля 2026.</strong></p>
+
+        <!-- ТИЗЕР: локальный файл, грузится только по клику -->
+        <div class="teaser" id="teaser"
+             data-mp4="teaser-vesna-16s.mp4"
+             data-webm="teaser-vesna-16s.webm"
+             role="button" tabindex="0"
+             aria-label="Тизер «Вдыхать Весну», 16 секунд — воспроизвести">
+          <picture>
+            <source srcset="cover-vesna.webp" type="image/webp">
+            <img class="poster" src="cover-vesna.jpg"
+                 alt="Тизер «Вдыхать Весну»"
+                 width="1000" height="1000"
+                 decoding="async" fetchpriority="high">
+          </picture>
+          <span class="badge">Тизер · 16 сек</span>
+          <span class="play">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Смотреть
+          </span>
+        </div>
+
+        <div class="ctas" style="margin-top:22px">
+          <a class="btn primary" href="https://music.yandex.ru/artist/778866" target="_blank" rel="noopener">
+            Слушать на Яндекс.Музыке
+          </a>
+          <a class="btn" href="https://www.youtube.com/@ronin_wave" target="_blank" rel="noopener">
+            YouTube канал
+          </a>
         </div>
       </div>
 
-      <h1>DJ RONIN</h1>
-      <p class="big">Музыка-притчи. Deep House / Melodic Electronic.</p>
-      <!-- ниже оставь свои chips/кнопки/mini как было -->
+      <!-- Портрет -->
+      <div class="portrait">
+        <picture>
+          <source srcset="portrait.webp" type="image/webp">
+          <img src="portrait.jpg" alt="Портрет DJ RONIN"
+               width="800" height="1200"
+               loading="lazy" decoding="async">
+        </picture>
+      </div>
     </div>
+  </section>
 
-    <div class="portrait">
-      <img src="portrait.jpg?v=1" alt="DJ Ronin portrait" decoding="async" fetchpriority="high" width="900" height="1350">
-      <div class="vignette"></div>
-    </div>
-  </div>
-</section>
-  <!-- МОДАЛКА ТИЗЕРА -->
-<div class="modal" id="teaserModal" aria-hidden="true">
-  <div class="modalBackdrop" id="closeTeaser"></div>
-  <div class="modalDialog" role="dialog" aria-modal="true">
-    <button class="modalClose" type="button" id="closeTeaserBtn" aria-label="Закрыть">✕</button>
-    <div class="modalFrame" id="teaserFrameWrap"></div>
-  </div>
-</div>
-    <section class="section" id="about">
-      <div class="card">
-        <div class="title">О проекте</div>
-        <p class="big">
-          Ronin — цифровой артист. Треки — как короткие притчи:
-          история без лишних слов. Смысл слышен в паузах.
-        </p>
+  <!-- ============ RELEASES ============ -->
+  <section id="releases" class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Релизы</h2>
+        <span class="hint">Все треки — на Яндекс.Музыке.</span>
       </div>
 
-      <div class="card">
-        <div class="title">Манифест</div>
-        <div class="quote">
-          Ритм — это дисциплина.<br/>
-          Мелодия — это память.<br/>
-          Тишина — это сила.
-        </div>
+      <div class="rel-grid">
 
-        <div class="btns" style="margin-top:12px;">
-          <a class="btn" href="#" id="parableLink">Притча недели →</a>
-        </div>
-      </div>
-    </section>
+        <!-- АНОНС: TrackZero — 29 апреля 2026 -->
+        <article class="rel featured" id="upcoming">
+          <div class="cover">
+            <picture>
+              <source srcset="cover-trackzero.webp" type="image/webp">
+              <img src="cover-trackzero.jpg" alt="Обложка: TrackZero"
+                   loading="eager" decoding="async" width="1024" height="1024" fetchpriority="high">
+            </picture>
+          </div>
+          <h3>TrackZero</h3>
+          <div class="meta">Сингл · <strong style="color:var(--accent)">29 апреля 2026</strong> · <span id="cd" class="countdown">осталось —</span></div>
+          <div class="links">
+            <a class="btn primary small"
+               href="https://band.link/qaH0L"
+               target="_blank" rel="noopener">Pre-save</a>
+          </div>
+        </article>
 
-    <section class="releases" id="releases">
-      <div class="card">
-        <div class="title">Релизы</div>
-
-        <div class="grid">
-          <div class="track track--upcoming">
-  <h3>Как трудно быть Богом</h3>
-  <p class="muted">Анонс • 04 марта 2026</p>
-  <div class="links">
-    <img class="mini-cover" src="cover-god.png" alt="Обложка: Как трудно быть Богом" />
-    <span class="tag">Скоро</span>
-  </div>
-</div>
-         <div class="track track--featured">
-           <div class="track track--upcoming">
-  <h3>Как трудно быть Богом</h3>
-  <p class="muted">Анонс • 04 марта 2026</p>
-  <div class="links">
-    <img class="mini-cover" src="cover-god.png" alt="Обложка: Как трудно быть Богом" />
-    <span class="tag">Скоро</span>
-  </div>
-</div>
+        <!-- Вдыхать Весну -->
+        <article class="rel">
+          <div class="cover">
+            <picture>
+              <source srcset="cover-vesna.webp" type="image/webp">
+              <img src="cover-vesna.jpg" alt="Обложка: Вдыхать Весну"
+                   loading="lazy" decoding="async" width="1000" height="1000">
+            </picture>
+          </div>
           <h3>Вдыхать Весну</h3>
-            <p class="muted">Сингл • 24 февраля 2026</p>
-            <div class="links">
-              <img class="mini-cover" src="cover-vesna.png" alt="Обложка: Вдыхать Весну"/>
-               <a class="btn btn-yandex" href="https://music.yandex.ru/album/40798190/track/148516409" target="_blank" rel="noopener">Яндекс</a>
-                </div>
-                 </div>
-          <div class="track">
-            <h3>Просто живой</h3>
-             <p class="muted">Трек</p>
-              <div class="links">
-                <img class="mini-cover" src="cover-prosto.jpeg" alt="Обложка: Просто живой"/>
-              <a class="btn btn-yandex" href="https://music.yandex.ru/album/40620801/track/148124228" target="_blank" rel="noopener">Яндекс</a>
-                </div>
-               </div>
+          <div class="meta">Сингл · 24 февраля 2026</div>
+          <div class="links">
+            <a class="btn primary small"
+               href="https://music.yandex.ru/album/40798190/track/148516409"
+               target="_blank" rel="noopener">Яндекс</a>
+          </div>
+        </article>
 
-           <div class="track">
-           <h3>Каньон</h3>
-           <p class="muted">Релиз</p>
-           <div class="links">
-             <img class="mini-cover" src="cover-kanyon.jpeg" alt="Обложка: Каньон"/>
-            <a class="btn btn-yandex" href="https://music.yandex.ru/album/40412942" target="_blank" rel="noopener">Яндекс</a>
-             </div>
-               </div>
+        <!-- Просто живой -->
+        <article class="rel">
+          <div class="cover">
+            <picture>
+              <source srcset="cover-prosto.webp" type="image/webp">
+              <img src="cover-prosto.jpg" alt="Обложка: Просто живой"
+                   loading="lazy" decoding="async" width="1000" height="1000">
+            </picture>
+          </div>
+          <h3>Просто живой</h3>
+          <div class="meta">Сингл · 2025</div>
+          <div class="links">
+            <a class="btn primary small"
+               href="https://music.yandex.ru/album/40620801/track/148124228"
+               target="_blank" rel="noopener">Яндекс</a>
+          </div>
+        </article>
 
-    </section>
+        <!-- Каньон -->
+        <article class="rel">
+          <div class="cover">
+            <picture>
+              <source srcset="cover-kanyon.webp" type="image/webp">
+              <img src="cover-kanyon.jpg" alt="Обложка: Каньон"
+                   loading="lazy" decoding="async" width="1000" height="1000">
+            </picture>
+          </div>
+          <h3>Каньон</h3>
+          <div class="meta">Релиз · 2025</div>
+          <div class="links">
+            <a class="btn primary small"
+               href="https://music.yandex.ru/album/40412942"
+               target="_blank" rel="noopener">Яндекс</a>
+          </div>
+        </article>
 
-    <section class="section" id="contact">
-      <div class="card">
-        <div class="title">Контакты</div>
-        <p class="big">Сотрудничество / плейлисты / букинг</p>
-   <p class="mini">
-  Email:
-  <a class="contact-a" href="mailto:kodbox777@yandex.ru?subject=Booking%20DJ%20RONIN">
-    kodbox777@yandex.ru
-  </a>
-  <br/>
-  Instagram:
-  <a class="contact-a" href="https://instagram.com/DJroninmusic" target="_blank" rel="noopener">
-    @DJroninmusic
-  </a>
-</p>
+        <!-- Как трудно быть Богом — Deep House Remix -->
+        <article class="rel">
+          <div class="cover">
+            <!-- Если зальёшь новую обложку cover-god-remix.webp/.jpg — добавь её первой <source> -->
+            <picture>
+              <source srcset="cover-god.webp" type="image/webp">
+              <img src="cover-god.jpg" alt="Обложка: Как трудно быть Богом (Deep House Remix)"
+                   loading="lazy" decoding="async" width="1000" height="1000">
+            </picture>
+          </div>
+          <h3>Как трудно быть Богом<br><span style="font-weight:500;color:var(--muted);font-size:13px">Deep House Remix</span></h3>
+          <div class="meta">Ремикс · март 2026</div>
+          <div class="links">
+            <!-- TODO: вставь ссылку трека, когда будет -->
+            <span class="tag soon">Скоро на Яндексе</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCHEDULE ============ -->
+  <section id="schedule" class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Release schedule</h2>
+        <span class="hint">Статусы обновляются автоматически по дате — ничего править вручную не нужно.</span>
       </div>
 
-      <div class="card">
-        <div class="title">Для слушателей</div>
-        <div class="quote">
-          Если тебе нужна музыка без позы — ты по адресу.
-        </div>
-      </div>
-    </section>
+      <ul class="sched" role="list">
+        <!-- Апрельский анонс на первом месте -->
+        <li data-date="2026-04-29">
+          <span class="date">29.04.2026</span>
+          <span class="title">Новый сингл — <em>название скоро</em></span>
+          <span class="status">—</span>
+        </li>
+        <li data-date="2026-03-04">
+          <span class="date">04.03.2026</span>
+          <span class="title">Как трудно быть Богом — <em>Deep House Remix</em></span>
+          <span class="status">—</span>
+        </li>
+        <li data-date="2026-03-06">
+          <span class="date">06.03.2026</span>
+          <span class="title">Новый сингл — <em>название скоро</em></span>
+          <span class="status">—</span>
+        </li>
+        <li data-date="2026-03-07">
+          <span class="date">07.03.2026</span>
+          <span class="title">Новый сингл — <em>название скоро</em></span>
+          <span class="status">—</span>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-    <footer>
-      © <span id="year"></span> DJ RONIN
-    </footer>
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="block">
+    <div class="wrap about">
+      <div>
+        <div class="eyebrow">О проекте</div>
+        <h2 style="margin:.1em 0 .4em;font-size:clamp(24px,3vw,32px);letter-spacing:-.01em">Минимум слов — максимум в треках</h2>
+        <p style="color:#cfcfcf;max-width:56ch">DJ RONIN — цифровой артист. Треки — как короткие притчи: история без лишних слов. Взрослый минимализм, дисциплина формы, один релиз — один смысл.</p>
+      </div>
+      <div class="quote">
+        Ритм — это дисциплина.<br>
+        Мелодия — это память.<br>
+        Тишина — это сила.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Контакты</h2>
+        <span class="hint">Сотрудничество, плейлисты, букинг.</span>
+      </div>
+      <div class="contact">
+        <a class="btn primary" href="mailto:kodbox777@yandex.ru?subject=Booking%20DJ%20RONIN">kodbox777@yandex.ru</a>
+        <a class="btn" href="https://instagram.com/DJroninmusic" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://www.youtube.com/@ronin_wave" target="_blank" rel="noopener">YouTube</a>
+        <a class="btn" href="https://www.tiktok.com/@ronin_wale" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%">
+    <span>© <span id="year"></span> DJ RONIN</span>
+    <a href="#top" style="color:var(--muted)">Наверх ↑</a>
   </div>
+</footer>
 
-  <script>
-  // ======= ВСТАВЬ СЮДА СВОИ ССЫЛКИ =======
-  const LINKS = {
-    listenAll: "https://music.yandex.ru/artist/778866",
-    parable: "https://music.yandex.ru/album/40620801/track/148124228", // Притча недели
-  email: "kodbox777@yandex.ru",
-instagram: "https://instagram.com/DJroninmusic",
-
-    tracks: [
-      {
-        title: "Просто Живой",
-        yandex: "https://music.yandex.ru/album/40620801/track/148124228",
-        spotify: "#",
-        apple: "#"
-      },
-      {
-        title: "Каньон",
-        yandex: "https://music.yandex.ru/album/40412942",
-        spotify: "#",
-        apple: "#"
-      },
-      {
-        title: "Релизы (март)",
-        yandex: "https://music.yandex.ru/artist/778866",
-        spotify: "#",
-        apple: "#"
-      }
-    ],
-
-    newReleaseTitle: "Просто Живой"
-  };
-
-  // ======= НЕ ТРОГАЙ НИЖЕ (само подставит) =======
-
-  // год в футере (если есть элемент)
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // главные ссылки (если элементы есть)
-  const listenLink = document.getElementById("listenLink");
- 
-  const parableLink = document.getElementById("parableLink");
-    const emailLink = document.getElementById("emailLink");
-if (emailLink) {
-  emailLink.textContent = LINKS.email;
-  emailLink.href = `mailto:${LINKS.email}?subject=Booking%20DJ%20RONIN`;
-}
-const parableLink = document.getElementById("parableLink");
-const emailLink = document.getElementById("emailLink");
-
-if (emailLink) {
-  emailLink.textContent = LINKS.email;
-  emailLink.href = `mailto:${LINKS.email}?subject=Booking%20DJ%20RONIN`;
-}
-
-// === ВОТ СЮДА (сразу после emailLink) ===
-const igLink = document.getElementById("igLink");
-if (igLink) {
-  igLink.textContent = "@DJroninmusic";
-  igLink.href = LINKS.instagram;
-}
-const igLink = document.getElementById("igLink");
-if (igLink) {
-  igLink.textContent = "@DJroninmusic";
-  igLink.href = LINKS.instagram;
-}
-
-  if (listenLink) listenLink.href = LINKS.listenAll;
-
-  if (parableLink) parableLink.href = LINKS.parable;
-
-  // email / новый релиз
-  const emailEl = document.getElementById("email");
-  if (emailEl) emailEl.textContent = LINKS.email;
-
-  const newReleaseEl = document.getElementById("newRelease");
-  if (newReleaseEl) newReleaseEl.textContent = LINKS.newReleaseTitle;
-
-  // треки (если есть элементы)
-  const ids = [
-    ["t1", "t1y", "t1s", "t1a", 0],
-    ["t2", "t2y", "t2s", "t2a", 1],
-    ["t3", "t3y", "t3s", "t3a", 2],
-  ];
-
-  ids.forEach(([titleId, yId, sId, aId, idx]) => {
-    const t = LINKS.tracks[idx] || {};
-    const titleEl = document.getElementById(titleId);
-    const yEl = document.getElementById(yId);
-    const sEl = document.getElementById(sId);
-    const aEl = document.getElementById(aId);
-
-    if (titleEl) titleEl.textContent = t.title || `Track ${idx + 1}`;
-    if (yEl) yEl.href = t.yandex || "#";
-    if (sEl) sEl.href = t.spotify || "#";
-    if (aEl) aEl.href = t.apple || "#";
-  });
-</script>
- <script>
+<script>
+  // ===== Год в футере
   (function(){
-    const btn = document.getElementById('teaserPlay');
-    const v = document.getElementById('teaserVideo');
-    if(!btn || !v) return;
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
 
-    btn.addEventListener('click', async () => {
-      try { await v.play(); } catch(e) {}
-      btn.style.display = 'none';
+  // ===== Обратный отсчёт до 29.04.2026 в карточке анонса
+  (function(){
+    var cd = document.getElementById('cd');
+    if (!cd) return;
+    var target = new Date('2026-04-29T00:00:00');
+    var today = new Date(); today.setHours(0,0,0,0);
+    var diff = Math.round((target - today) / 86400000);
+    if (diff > 1) cd.textContent = 'осталось ' + diff + ' дн.';
+    else if (diff === 1) cd.textContent = 'завтра';
+    else if (diff === 0) cd.textContent = 'сегодня';
+    else { cd.textContent = 'Released'; cd.style.color = 'var(--fg)'; cd.style.borderColor = 'var(--line-strong)'; }
+  })();
+
+  // ===== Авто-статус в расписании
+  (function(){
+    var today = new Date(); today.setHours(0,0,0,0);
+    document.querySelectorAll('.sched li[data-date]').forEach(function(li){
+      var d = new Date(li.getAttribute('data-date'));
+      var s = li.querySelector('.status');
+      if (!s) return;
+      if (d <= today){ s.textContent = 'Released'; s.classList.add('released'); }
+      else { s.textContent = 'Скоро'; s.classList.add('soon'); }
     });
   })();
-</script>  
-        <script>
+
+  // ===== Тизер: грузим видео только по клику/Enter/Space
   (function(){
-    const VIDEO_ID = "VIDEO_ID_HERE";
-    const openBtn = document.getElementById('openTeaser');
-    const modal = document.getElementById('teaserModal');
-    const close1 = document.getElementById('closeTeaser');
-    const close2 = document.getElementById('closeTeaserBtn');
-    const wrap = document.getElementById('teaserFrameWrap');
+    var card = document.getElementById('teaser');
+    if (!card) return;
 
-    function openModal(){
-      modal.classList.add('isOpen');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      wrap.innerHTML = `
-        <iframe
-          src="https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=0&playsinline=1&rel=0"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen
-        ></iframe>`;
+    function activate(){
+      if (card.classList.contains('is-playing')) return;
+      var mp4  = card.getAttribute('data-mp4')  || '';
+      var webm = card.getAttribute('data-webm') || '';
+
+      var video = document.createElement('video');
+      video.controls = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline','');
+      video.preload = 'metadata';
+      video.autoplay = true;
+      // poster оставляем, чтобы не было чёрной вспышки
+      var posterEl = card.querySelector('.poster');
+      if (posterEl) video.poster = posterEl.getAttribute('src') || '';
+
+      if (webm){
+        var s1 = document.createElement('source'); s1.src = webm; s1.type = 'video/webm'; video.appendChild(s1);
+      }
+      if (mp4){
+        var s2 = document.createElement('source'); s2.src = mp4;  s2.type = 'video/mp4';  video.appendChild(s2);
+      }
+
+      card.appendChild(video);
+      card.classList.add('is-playing');
+
+      var p = video.play();
+      if (p && p.catch) p.catch(function(){ /* если автоплей заблокирован — юзер нажмёт controls */ });
     }
 
-    function closeModal(){
-      modal.classList.remove('isOpen');
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-      wrap.innerHTML = '';
-    }
-    if(openBtn) openBtn.addEventListener('click', openModal);
-    if(close1) close1.addEventListener('click', closeModal);
-    if(close2) close2.addEventListener('click', closeModal);
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+    card.addEventListener('click', activate);
+    card.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); activate(); }
+    });
   })();
 </script>
+
 </body>
 </html>
